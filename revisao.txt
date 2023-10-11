@@ -1,0 +1,45 @@
+-------------Revisão da prova--------------
+atributos:
+
+metodos de acesso (get e set) 
+final: torna o atributo ou a variavel em uma constante (nao pode ser mudado)
+
+Classe: definição de um tipo
+
+
+
+Construtor: inicialize a classe
+
+
+*sobrecarga*
+
+pessoa(String nome)
+pessoa(String nome, String cpf)
+pessoa(String nome, String cpf, String Endereco)
+
+
+
+new: aloca espaço de memória
+Static: utilizado quando nao se quer tabalhar com instancia(valor unico)
+
+
+orientação a objetos:
+
+herança: herdar atributos, metodos de outra classe
+polimorfismo: permite que as classes sejam tratadas de maneira uniforme
+
+
+*Classe abstrata*
+
+Serve como modelo para as outras classes que ela herda
+Classe abstrata nao pode ser instanciada
+como criar: public abstract class *nome da classe* ou *nome do metodo*
+uma classe pode estender ter apenas UMA classe abstata
+
+
+*Interface*
+
+Interface é um contrato
+Como criar: public interface *nome da interface*
+interface IMPLEMENTA
+uma classe pode implementar mais de uma interface 
