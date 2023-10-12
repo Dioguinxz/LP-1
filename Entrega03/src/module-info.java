@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author doassis
+ * @author Tecnico - TI
  *
  */
 module Entrega03 {
