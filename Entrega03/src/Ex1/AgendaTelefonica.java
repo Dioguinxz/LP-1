@@ -13,16 +13,17 @@ public class AgendaTelefonica {
 
 	private ArrayList<Contato> contatos = new ArrayList<>();
 
-	public boolean adicionarContato(String nome, String telefone, String email, LocalDate dataNascimento) {
-		for (Contato contato : contatos) {
-			if (contato.getNome().equals(nome)) {
-				System.out.println("Nome duplicado. O contato não foi adicionado.");
+	public boolean adicionarContato(Contato contato) {
+		for (Contato c : contatos) {
+			if (c.getNome().equalsIgnoreCase(contato.getNome())) {
+				System.out.println("Esse contato já existe!");
 				return false;
 			}
 		}
-
-		contatos.add(new Contato(nome, telefone, email, dataNascimento));
-		return true;
+		
+		  contatos.add(contato);
+	        return true; 
+	       
 	}
 
 	public boolean removerContato(String nome) {
@@ -35,6 +36,28 @@ public class AgendaTelefonica {
 		}
 		System.out.println("Contato não encontrado.");
 		return false;
+	}
+
+	public Contato procurarContato(String nome) {
+		for (Contato contato : contatos) {
+			if (contato.getNome().equalsIgnoreCase(nome)) {
+				//System.out.println(contato);
+				return contato;
+			}
+		}
+		System.out.println("Contato não encontrado.");
+		return null;
+	}
+
+	public void editarContato(String nome, Contato novoContato) {
+		for (int i = 0; i < contatos.size(); i++) {
+			if (contatos.get(i).getNome().equalsIgnoreCase(nome)) {
+				contatos.set(i, novoContato);
+				System.out.println("Contato editado.");
+				return;
+			}
+		}
+		System.out.println("Contato não encontrado.");
 	}
 
 	public void listarContatosOrdemAlfabetica() {
@@ -51,6 +74,7 @@ public class AgendaTelefonica {
 	public void listarContatosDataNascimento() {
 		ComparaContato c1 = new ComparaContato();
 		Collections.sort(contatos, c1);
+
 		for (Contato contato : contatos) {
 			System.out.println("Nome: " + contato.getNome());
 			System.out.println("Telefone: " + contato.getTelefone());
@@ -81,6 +105,7 @@ public class AgendaTelefonica {
 			if (contato.getDataNascimento().getDayOfMonth() == dataAtual.getDayOfMonth()
 					&& contato.getDataNascimento().getMonth() == dataAtual.getMonth()) {
 				aniversarianteEncontrado = true;
+				System.out.println("Aniversariante do dia: " + contato.getNome());
 
 			}
 		}
@@ -88,6 +113,7 @@ public class AgendaTelefonica {
 		if (!aniversarianteEncontrado) {
 			System.out.println("Não há aniversariantes.");
 		}
-		
+
 	}
+
 }

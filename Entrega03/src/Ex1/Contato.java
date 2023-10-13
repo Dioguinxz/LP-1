@@ -7,8 +7,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class Contato implements Comparable <Contato> { 
+public class Contato implements Comparable<Contato> {
 
 	private String nome;
 	private String telefone;
@@ -54,9 +55,16 @@ public class Contato implements Comparable <Contato> {
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
 	@Override
 	public int compareTo(Contato outroContato) {
-        return this.nome.compareTo(outroContato.nome);
-}
+		return this.nome.compareTo(outroContato.nome);
+	}
 	
+	public String toString() {
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return "Nome: " + nome + ", Telefone: " + telefone + ", Email: " + email + ", Data de Nascimento: "
+				+ dateFormat.format(dataNascimento);
+	}
+
 }
