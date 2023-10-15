@@ -9,13 +9,17 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+//Classe Contato que implementa a interface Comparable.
+
 public class Contato implements Comparable<Contato> {
 
 	private String nome;
 	private String telefone;
 	private String email;
 	private LocalDate dataNascimento;
-
+	
+	//Construtor para inicializar a classe
+	
 	Contato(String nome, String telefone, String email, LocalDate dataNascimento) {
 		this.nome = nome;
 		this.telefone = telefone;
@@ -24,6 +28,9 @@ public class Contato implements Comparable<Contato> {
 
 	}
 
+	
+	//Criação dos métodos de acessos get e set
+	
 	public String getNome() {
 		return nome;
 	}
@@ -56,15 +63,10 @@ public class Contato implements Comparable<Contato> {
 		this.dataNascimento = dataNascimento;
 	}
 
+	//Sobrepondo o método compareTo
 	@Override
 	public int compareTo(Contato outroContato) {
 		return this.nome.compareTo(outroContato.nome);
-	}
-	
-	public String toString() {
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		return "Nome: " + nome + ", Telefone: " + telefone + ", Email: " + email + ", Data de Nascimento: "
-				+ dateFormat.format(dataNascimento);
 	}
 
 }

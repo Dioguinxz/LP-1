@@ -9,10 +9,16 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+//Criação da classe AgendaTelefonica
+
 public class AgendaTelefonica {
 
+	//Criação de um ArrayList de contatos
+	
 	private ArrayList<Contato> contatos = new ArrayList<>();
 
+	
+	//Método para adicionar contatos na lista
 	public boolean adicionarContato(Contato contato) {
 		for (Contato c : contatos) {
 			if (c.getNome().equalsIgnoreCase(contato.getNome())) {
@@ -20,12 +26,13 @@ public class AgendaTelefonica {
 				return false;
 			}
 		}
-		
-		  contatos.add(contato);
-	        return true; 
-	       
+
+		contatos.add(contato);
+		return true;
+
 	}
 
+	//Método para remover contatos da lista
 	public boolean removerContato(String nome) {
 		for (Contato contato : contatos) {
 			if (contato.getNome().equals(nome)) {
@@ -38,10 +45,10 @@ public class AgendaTelefonica {
 		return false;
 	}
 
+	//Método para procurar um contato na lista
 	public Contato procurarContato(String nome) {
 		for (Contato contato : contatos) {
 			if (contato.getNome().equalsIgnoreCase(nome)) {
-				//System.out.println(contato);
 				return contato;
 			}
 		}
@@ -49,6 +56,7 @@ public class AgendaTelefonica {
 		return null;
 	}
 
+	//Método para editar contatos na lista
 	public void editarContato(String nome, Contato novoContato) {
 		for (int i = 0; i < contatos.size(); i++) {
 			if (contatos.get(i).getNome().equalsIgnoreCase(nome)) {
@@ -60,8 +68,10 @@ public class AgendaTelefonica {
 		System.out.println("Contato não encontrado.");
 	}
 
+	
+	//Método para listar contatos por ordem alfabática na lista
 	public void listarContatosOrdemAlfabetica() {
-		Collections.sort(contatos);
+		Collections.sort(contatos);				
 		for (Contato contato : contatos) {
 			System.out.println("Nome: " + contato.getNome());
 			System.out.println("Telefone: " + contato.getTelefone());
@@ -71,6 +81,7 @@ public class AgendaTelefonica {
 		}
 	}
 
+	//Método para listar contatos por data de nascimento na lista
 	public void listarContatosDataNascimento() {
 		ComparaContato c1 = new ComparaContato();
 		Collections.sort(contatos, c1);
@@ -84,9 +95,11 @@ public class AgendaTelefonica {
 		}
 	}
 
+	
+	//Método para listar contatos por ordem de email na lista
 	public void listarContatosEmail() {
-		ComparaContato c2 = new ComparaContato();
-		Collections.sort(contatos, c2);
+		ComparaEmail c2 = new ComparaEmail();
+		Collections.sort(contatos);
 		for (Contato contato : contatos) {
 			System.out.println("Nome: " + contato.getNome());
 			System.out.println("Telefone: " + contato.getTelefone());
@@ -97,6 +110,7 @@ public class AgendaTelefonica {
 
 	}
 
+	//Método para listar aniversariantes do dia na lista
 	public void listarAniversariantesDoDia() {
 		LocalDate dataAtual = LocalDate.now();
 		boolean aniversarianteEncontrado = false;

@@ -1,17 +1,16 @@
 package Ex1;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+
+//Criação da classe ComparaContato que implementa a interface Comparable.
 
 public class ComparaContato implements Comparator<Contato> {
 
-
+	// Sobrepondo o método compareTo//Sobrepondo o método compareTo
 	@Override
 	public int compare(Contato o1, Contato o2) {
-		// TODO Auto-generated method stub
-		return 	o1.getDataNascimento().compareTo(o2.getDataNascimento());
-		
+		return o1.getDataNascimento().compareTo(o2.getDataNascimento());
+
 	}
-	
-	
+
 }

@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
 
+//Criação da classe de teste
 public class TesteAgenda {
 	public static void main(String[] args) throws ParseException {
 		Scanner teclado = new Scanner(System.in);
@@ -17,13 +18,14 @@ public class TesteAgenda {
 
 		int opcao;
 
+		// Criação do menu da agenda telefonica
 		do {
 			System.out.println("------------------AGENDA TELEFONICA---------------------");
 			System.out.println("(1) - Adicionar um contato");
 			System.out.println("(2) - Remover um contato");
 			System.out.println("(3) - Procurar contato: ");
 			System.out.println("(4) - Editar contato: ");
-			System.out.println("(5) - Listar os contatos em ordem alfabetica");
+			System.out.println("(5) - Listar os contatos em ordem alfabetica:");
 			System.out.println("(6) - Listar contatos pela data de nascimento:");
 			System.out.println("(7) - Listar contatos pelo email: ");
 			System.out.println("(8) - Listar anivesariantes do dia:");
@@ -32,6 +34,7 @@ public class TesteAgenda {
 			opcao = teclado.nextInt();
 			teclado.nextLine();
 
+			// Criação dos casos correspondentes a cada opção do menu
 			switch (opcao) {
 			case 1:
 				System.out.println("Nome: ");
@@ -44,14 +47,15 @@ public class TesteAgenda {
 				int dia = teclado.nextInt();
 				int mes = teclado.nextInt();
 				int ano = teclado.nextInt();
+				// Tratamento de excessão caso o formato de data seja inválido
 				try {
-                    LocalDate data = LocalDate.of(ano, mes, dia);
-                    Contato contato = new Contato(nome, telefone, email, data);
-                    a1.adicionarContato(contato);
-                    System.out.println("Contato adicionado com sucesso!");
-                } catch (DateTimeException e) {
-                    System.err.println("Erro: Verifique se você digitou corretamente a data de naxcimento!");
-                }
+					LocalDate data = LocalDate.of(ano, mes, dia);
+					Contato contato = new Contato(nome, telefone, email, data);
+					a1.adicionarContato(contato);
+					System.out.println("Contato adicionado com sucesso!");
+				} catch (DateTimeException e) {
+					System.err.println("Erro: Verifique se você digitou corretamente a data de naxcimento!");
+				}
 				break;
 
 			case 2:
@@ -87,7 +91,7 @@ public class TesteAgenda {
 					int diaNovo = teclado.nextInt();
 					int mesNovo = teclado.nextInt();
 					int anoNovo = teclado.nextInt();
-
+					// Tratamento de excessão caso o formato de data seja inválido
 					try {
 						LocalDate dataNova = LocalDate.of(anoNovo, mesNovo, diaNovo);
 						Contato contato = new Contato(novoNome, novoTelefone, novoEmail, dataNova);
@@ -107,31 +111,31 @@ public class TesteAgenda {
 				}
 
 				break;
-				
+
 			case 5:
 				System.out.println("Lista de contatos em ordem alfabética:");
 				a1.listarContatosOrdemAlfabetica();
 				break;
-				
-			case 6: 
+
+			case 6:
 				System.out.println("Lista de contatos por ordem de nascimento:");
 				a1.listarContatosDataNascimento();
 				break;
-			
-			case 7: 
+
+			case 7:
 				System.out.println("Lista de contatos por ordem de email:");
 				a1.listarContatosEmail();
 				break;
-			
+
 			case 8:
 				a1.listarAniversariantesDoDia();
 				break;
-				
+
 			case 9:
 				System.out.println("Agenda telefonica encerrada!");
 				System.exit(0);
 				break;
-				
+
 			default:
 				System.err.println("Opção inválida!");
 			}
