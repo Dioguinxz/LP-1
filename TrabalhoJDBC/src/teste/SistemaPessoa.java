@@ -13,7 +13,7 @@ public class SistemaPessoa {
 
 		int opcao = 0;
 
-		while (opcao != 5) {
+		while (opcao != 9) {
 			imprimirMenu();
 
 			System.out.println("Informe uma opção");
@@ -26,7 +26,7 @@ public class SistemaPessoa {
 			case 2:
 				listarNome();
 				break;
-			
+
 			case 3:
 				listarSobrenome();
 				break;
@@ -34,7 +34,9 @@ public class SistemaPessoa {
 			case 4:
 				listarEmail();
 				break;
+				
 			case 5:
+				remover();
 				break;
 			}
 		}
@@ -89,7 +91,7 @@ public class SistemaPessoa {
 		}
 
 	}
-	
+
 	public static void listarSobrenome() throws DbExcetion {
 
 		List<Pessoa> pessoas = PessoaDB.listarNome();
@@ -105,7 +107,7 @@ public class SistemaPessoa {
 		}
 
 	}
-	
+
 	public static void listarEmail() throws DbExcetion {
 
 		List<Pessoa> pessoas = PessoaDB.listarEmail();
@@ -121,21 +123,26 @@ public class SistemaPessoa {
 		}
 
 	}
-	
+
 	public static void remover() {
 		Scanner teclado = new Scanner(System.in);
-		
+
 		System.out.println("Informe o ID: ");
 		int id = teclado.nextInt();
+		
+		try {
+			PessoaDB.remover(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
-	
-	
 
 	public static void imprimirMenu() {
 		System.out.println("1 - Inserir");
 		System.out.println("2 - Listar por nome:");
 		System.out.println("3 - Listar por sobrenome:");
 		System.out.println("4 - Listar por email: ");
+		System.out.println("5 - Remover Pessoa: ");
 
 	}
 }
