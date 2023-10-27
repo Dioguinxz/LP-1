@@ -38,6 +38,18 @@ public class SistemaPessoa {
 			case 5:
 				remover();
 				break;
+				
+			case 6:
+				procurarNome();
+				break;
+				
+			case 7:
+				procurarSobrenome();
+				break;
+				
+			case 8:
+				listarAparicoes();
+				break;
 			}
 		}
 	}
@@ -124,7 +136,7 @@ public class SistemaPessoa {
 
 	}
 
-	public static void remover() {
+	public static void remover() throws DbExcetion {
 		Scanner teclado = new Scanner(System.in);
 
 		System.out.println("Informe o ID: ");
@@ -132,17 +144,58 @@ public class SistemaPessoa {
 		
 		try {
 			PessoaDB.remover(id);
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (DbException e) {
+			System.err.println(e.getMessage());
 		}
 	}
+	
+	public static void procurarNome() throws DbExcetion {
+		Scanner teclado = new Scanner(System.in);
+		
+		System.out.println("Informe o nome que deseja procurar: ");
+		String nomeProcurar = teclado.nextLine();
+		
+		try {
+			PessoaDB.ProcurarPorNome(nomeProcurar);
+		} catch (DbException e) {
+			System.err.println(e.getMessage());
+		}
+		
+	}
+	
+	public static void procurarSobrenome() throws DbExcetion {
+		Scanner teclado = new Scanner(System.in);
+		
+		System.out.println("Informe o sobrenome que deseja procurar: ");
+		String sobrenomeProcurar = teclado.nextLine();
+		
+		try {
+			PessoaDB.ProcurarPorSobrenome(sobrenomeProcurar);
+		} catch (DbException e) {
+			System.err.println(e.getMessage());
+		}
+		
+	}
+	
+	public static void listarAparicoes() throws DbExcetion {
+		System.out.println("Aparições: ");
+	
+		try {
+			PessoaDB.listaAparicoes();
+		} catch (DbException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
 
 	public static void imprimirMenu() {
 		System.out.println("1 - Inserir");
 		System.out.println("2 - Listar por nome:");
 		System.out.println("3 - Listar por sobrenome:");
 		System.out.println("4 - Listar por email: ");
-		System.out.println("5 - Remover Pessoa: ");
-
+		System.out.println("5 - Remover pessoa: ");
+		System.out.println("6 - Procurar pessoa por nome:");
+		System.out.println("7 - Procurar pessoa por sobrenome:");
+		System.out.println("8 - Listar por aparições de sobrenome:");
 	}
 }

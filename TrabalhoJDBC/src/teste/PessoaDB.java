@@ -183,4 +183,154 @@ public class PessoaDB {
 		}
 	}
 
+	public static List<Pessoa> ProcurarPorNome(String nome) throws DbExcetion {
+		List<Pessoa> resultados = new ArrayList<>();
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = ConexaoDB.getConexao();
+
+			String sql = "SELECT * FROM PESSOA WHERE NOME LIKE ?";
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, ("%" + nome.toUpperCase() + "%"));
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int age = rs.getInt("idade");
+				String first = rs.getString("nome");
+				String last = rs.getString("sobrenome");
+				String email = rs.getString("email");
+				String telefone = rs.getString("telefone");
+				System.out.println("ID: " + id);
+				System.out.println("Nome: " + first);
+				System.out.println("Sobrenome: " + last);
+				System.out.println("Idade: " + age);
+				System.out.println("Email: " + email);
+				System.out.println("Telefone" + telefone);
+
+				resultados.add(new Pessoa(id, first, last, age, email, telefone));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DbExcetion("Falha ao procurar pessoa!");
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+
+		return resultados;
+
+	}
+
+	public static List<Pessoa> ProcurarPorSobrenome(String sobrenome) throws DbExcetion {
+		List<Pessoa> resultados = new ArrayList<>();
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = ConexaoDB.getConexao();
+
+			String sql = "SELECT * FROM PESSOA WHERE SOBRENOME LIKE ?";
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, ("%" + sobrenome.toUpperCase() + "%"));
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int age = rs.getInt("idade");
+				String first = rs.getString("nome");
+				String last = rs.getString("sobrenome");
+				String email = rs.getString("email");
+				String telefone = rs.getString("telefone");
+				System.out.println("ID: " + id);
+				System.out.println("Nome: " + first);
+				System.out.println("Sobrenome: " + last);
+				System.out.println("Idade: " + age);
+				System.out.println("Email: " + email);
+				System.out.println("Telefone" + telefone);
+
+				resultados.add(new Pessoa(id, first, last, age, email, telefone));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DbExcetion("Falha ao procurar pessoa!");
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+
+		return resultados;
+
+	}
+
+	public static List<Pessoa> listaAparicoes() throws DbExcetion {
+		List<Pessoa> resultados = new ArrayList<>();
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = ConexaoDB.getConexao();
+
+			String sql = "SELECT  SOBRENOME, COUNT(*) AS APARICOES FROM PESSOA GROUP BY SOBRENOME";
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				String last = rs.getString("sobrenome");
+				int aparicoes = rs.getInt("aparicoes");
+
+				System.out.println(last + ", " + aparicoes);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DbExcetion("Falha ao listar aparições!");
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return resultados;
+
+	}
+
 }
